@@ -1,0 +1,23 @@
+---
+- name: Install MySQL server
+  apt: 
+    name: mysql-server 
+    state: latest
+
+- name: Install MySQL module for PHP
+  apt: 
+    name: php-mysql 
+    state: latest
+
+- name: Install Python MySQLdb
+  apt: name=python-mysqldb state=latest
+
+- name: Create the Drupal database
+  mysql_db: db=drupal_db state=present
+
+- name: Create the Drupal user
+  mysql_user: >
+    name=drupal_user
+    password=1q2w3e4r5t6y7u8i
+    priv=drupal_db.*:ALL
+    host=localhost

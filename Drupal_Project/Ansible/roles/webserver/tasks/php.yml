@@ -1,0 +1,41 @@
+---
+  - name: Install PHP and associated packages
+    apt:
+      name: php
+      state: latest
+
+  - name: Install PHP GD library
+    apt:
+      name: php-gd
+      state: latest
+
+  - name: Install PHP XML library
+    apt:
+      name: php-xml
+      state: latest
+
+  - name: Install PHP dom library
+    apt:
+      name: php-dom
+      state: latest
+
+  - name: Install PHP mbstring library
+    apt:
+      name: php-mbstring
+      state: latest
+
+  - name: "Installing Apache" 
+    apt:
+      name: apache2
+      state: latest
+  - name: "Install apache2-php" 
+    apt:
+      name: libapache2-mod-php
+      state: latest
+
+    notify:
+     - Restart Apache
+      
+
+
+

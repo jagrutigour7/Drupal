@@ -1,0 +1,36 @@
+---
+# tasks file for drupal
+- name: download drupal
+  get_url:
+    url: http://ftp.drupal.org/files/projects/drupal-8.8.2.tar.gz
+    dest: /var/www/html/
+
+- name:  unzip drupal
+  unarchive:
+    src: /var/www/html/drupal-8.8.2.tar.gz
+    dest: /var/www/html/
+
+- name: Rename tar file
+  command: mv /var/www/html/drupal-8.8.2 /var/www/html/drupal
+
+- name: Create settings.php
+  command: cp /var/www/html/drupal/sites/default/default.settings.php /var/www/html/drupal/sites/default/settings.php
+
+- name: Create services.yml
+  command: cp /var/www/html/drupal/sites/default/default.services.yml /var/www/html/drupal/sites/default/services.yml
+
+- name: Update permissions of settings.php
+  file: path=/var/www/html/drupal/sites/default/settings.php mode=777
+
+- name: Update permissions of services.yml
+  file: path=/var/www/html/drupal/sites/default/services.yml mode=777
+
+- name: Update permissions of files directory
+  file: >
+    path=/var/www/html/drupal/sites/default/files
+    mode=777
+    state=directory
+    recurse=yes
+
+- name: Update permissions and ownership
+  file: path=/var/www/html/drupal owner=adminuser group=adminuser mode=0775 

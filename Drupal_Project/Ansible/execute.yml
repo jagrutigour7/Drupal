@@ -1,0 +1,15 @@
+---
+- hosts: dbserver
+  become: true
+  become_method: sudo
+  roles:
+    - dbserver
+
+
+- hosts: webserver
+  become: true
+  become_method: sudo
+  roles:
+    - webserver
+
+
